@@ -36,6 +36,12 @@ class Job {
             Remember: I can use any method declared as `static` directly from the class
             without having to instantiate it
         */
-        return Arr::first(static::all(), fn($job) => $job['id'] === $id);
+        $job = Arr::first(static::all(), fn($job) => $job['id'] === $id);
+
+        if (!$job) {
+            abort(404);
+        }
+
+        return $job;
     }
 }
